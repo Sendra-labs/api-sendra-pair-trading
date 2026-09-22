@@ -11,13 +11,49 @@ class BinanceService {
         this.interval = interval;
         this.limit = limit;
     }
+    coinFromSymbol(symbol) {
+        return symbol.toUpperCase().replace(/(USDT|USDC)$/, '');
+    }
+    async getHyperliquidKlines(symbol) {
+        const coin = this.coinFromSymbol(symbol);
+        const endTime = Date.now();
+        const startTime = endTime - this.limit * 24 * 60 * 60 * 1000;
+        const response = await axios_1.default.post('https://api.hyperliquid.xyz/info', {
+            type: 'candleSnapshot',
+            req: { coin, interval: this.interval, startTime, endTime }
+        }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } });
+        if (!Array.isArray(response.data) || response.data.length === 0)
+            return null;
+        return response.data.map((candle) => [
+            candle.t,
+            candle.o,
+            candle.h,
+            candle.l,
+            candle.c,
+            candle.v,
+            candle.T,
+            '0',
+            0,
+            '0',
+            '0',
+            '0'
+        ]);
+    }
     async getKlines(symbol) {
+        try {
+            const hyperliquid = await this.getHyperliquidKlines(symbol);
+            if (hyperliquid) {
+                return { success: true, data: hyperliquid, symbol };
+            }
+        }
+        catch {
+        }
         try {
             const url = `${this.baseUrl}?symbol=${symbol}&interval=${this.interval}&limit=${this.limit}`;
             const response = await axios_1.default.get(url, {
                 timeout: 10000,
                 headers: {
-                    'User-Agent': 'Binance-Correlation-Analyzer/1.0.0'
+                    'User-Agent': 'Market-Neutral-Intelligence-Engine/1.0.0'
                 }
             });
             if (response.status === 200 && Array.isArray(response.data)) {
