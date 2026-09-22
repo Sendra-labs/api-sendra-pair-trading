@@ -1,6 +1,6 @@
-# Binance Pair Trading API
+# Market-Neutral Intelligence Engine
 
-RESTful API for analyzing long/short pair trading strategies on Binance cryptocurrency pairs.
+RESTful API for market-neutral long/short pair analysis. OHLCV comes from the Hyperliquid candle API, with Binance as fallback when a coin is not listed there.
 
 ## Base URL
 
@@ -340,7 +340,7 @@ Currently, no rate limiting is implemented. Use responsibly.
 
 ## Data Sources
 
-Price data is sourced from Binance public API (`https://api.binance.com/api/v3/klines`).
+Price data is sourced from the Hyperliquid candle API (`https://api.hyperliquid.xyz/info`, `candleSnapshot`). Binance klines are only used when Hyperliquid has no candles for that coin.
 
 <!--
   █████████                                   █████                          

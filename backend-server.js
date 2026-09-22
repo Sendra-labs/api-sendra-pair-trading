@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 
-console.log('Iniciando servidor...');
+console.log('Market-Neutral Intelligence Engine');
 const app = express();
 const PORT = 3001;
 
@@ -342,6 +342,7 @@ const MARKET_CAP_CATEGORIES = {
   'OPUSDT': 'L',
   'APEUSDT': 'SUPERL',
   'GMXUSDT': 'SUPERL',
+  'HYPEUSDT': 'H',
   'AAVEUSDT': 'L',
   'UNIUSDT': 'L',
   'ADAUSDT': 'M',
@@ -754,7 +755,7 @@ app.get('/api/strategy-bundles', async (req, res) => {
 
     const systematicPairs = [];
     
-    const longTokens = ['BTCUSDT', 'ETHUSDT', 'LINKUSDT', 'SOLUSDT', 'BNBUSDT'];
+    const longTokens = ['BTCUSDT', 'ETHUSDT', 'LINKUSDT', 'SOLUSDT', 'BNBUSDT', 'HYPEUSDT'];
     
     let targetLongTokens = [];
     let targetShortTokens = [];

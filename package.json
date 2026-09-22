@@ -1,5 +1,5 @@
 {
-  "name": "binance-correlation-analyzer",
+  "name": "market-neutral-intelligence-engine",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "url": "https://github.com/Diego-AVZ/analyzer/issues"
   },
   "homepage": "https://github.com/Diego-AVZ/analyzer#readme",
-  "description": "Analizador de correlaciones inversas entre tokens de Binance",
+  "description": "Market-Neutral Intelligence Engine",
   "dependencies": {
     "axios": "^1.6.0",
     "cors": "^2.8.5",
